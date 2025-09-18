@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basename = "/lumiere";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

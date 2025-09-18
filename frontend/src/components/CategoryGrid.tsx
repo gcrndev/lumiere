@@ -2,6 +2,7 @@ import categoryRings from "@/assets/category-rings.jpg";
 import categoryEarrings from "@/assets/category-earrings.jpg";
 import categoryNecklaces from "@/assets/category-necklaces.jpg";
 import categoryBracelets from "@/assets/category-bracelets.jpg";
+import { Link, NavLink } from "react-router-dom";
 
 interface Category {
   id: string;
@@ -18,43 +19,43 @@ const CategoryGrid = () => {
       name: "Anéis",
       image: categoryRings,
       href: "/aneis",
-      description: "Anéis de noivado, alianças e solitários"
+      description: "Anéis de noivado, alianças e solitários",
     },
     {
-      id: "brincos", 
+      id: "brincos",
       name: "Brincos",
       image: categoryEarrings,
       href: "/brincos",
-      description: "Studs, argolas e brincos pendentes"
+      description: "Studs, argolas e brincos pendentes",
     },
     {
       id: "colares",
       name: "Colares",
       image: categoryNecklaces,
-      href: "/colares", 
-      description: "Gargantilhas, pendentes e correntes"
+      href: "/colares",
+      description: "Gargantilhas, pendentes e correntes",
     },
     {
       id: "pulseiras",
       name: "Pulseiras",
       image: categoryBracelets,
       href: "/pulseiras",
-      description: "Pulseiras tennis, charm e braceletes"
+      description: "Pulseiras tennis, charm e braceletes",
     },
     {
       id: "aliancas",
       name: "Alianças",
       image: categoryRings,
       href: "/aliancas",
-      description: "Alianças de casamento clássicas e modernas"
+      description: "Alianças de casamento clássicas e modernas",
     },
     {
       id: "colecoes",
       name: "Coleções",
       image: categoryNecklaces,
       href: "/colecoes",
-      description: "Coleções exclusivas e limitadas"
-    }
+      description: "Coleções exclusivas e limitadas",
+    },
   ];
 
   return (
@@ -65,20 +66,20 @@ const CategoryGrid = () => {
             Descubra as Nossas Categorias
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Cada peça conta uma história única. Explore a nossa coleção de joias elegantes 
-            criadas para os momentos mais especiais da sua vida.
+            Cada peça conta uma história única. Explore a nossa coleção de joias
+            elegantes criadas para os momentos mais especiais da sua vida.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => (
-            <a
+            <Link
               key={category.id}
-              href={category.href}
+              to={category.href}
               className={`group relative overflow-hidden rounded-xl bg-surface-cream hover-lift animate-fade-in-up ${
                 index === categories.length - 1 && categories.length % 3 !== 0
-                  ? 'md:col-span-2 lg:col-span-1'
-                  : ''
+                  ? "md:col-span-2 lg:col-span-1"
+                  : ""
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -108,11 +109,21 @@ const CategoryGrid = () => {
 
               {/* Indicador de hover */}
               <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-95 group-hover:scale-100">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-4 h-4 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

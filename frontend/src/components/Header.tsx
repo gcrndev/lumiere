@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import lumierelogo from "@/assets/lumiere-logo.png";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -27,8 +28,8 @@ const Header = () => {
         { name: "Anéis de Noivado", href: "/aneis/noivado" },
         { name: "Anéis Solitários", href: "/aneis/solitarios" },
         { name: "Alianças", href: "/aneis/aliancas" },
-        { name: "Anéis Cocktail", href: "/aneis/cocktail" }
-      ]
+        { name: "Anéis Cocktail", href: "/aneis/cocktail" },
+      ],
     },
     {
       name: "Brincos",
@@ -37,8 +38,8 @@ const Header = () => {
         { name: "Brincos Pendentes", href: "/brincos/pendentes" },
         { name: "Argolas", href: "/brincos/argolas" },
         { name: "Studs", href: "/brincos/studs" },
-        { name: "Ear Cuffs", href: "/brincos/ear-cuffs" }
-      ]
+        { name: "Ear Cuffs", href: "/brincos/ear-cuffs" },
+      ],
     },
     {
       name: "Colares",
@@ -47,8 +48,8 @@ const Header = () => {
         { name: "Gargantilhas", href: "/colares/gargantilhas" },
         { name: "Pendentes", href: "/colares/pendentes" },
         { name: "Correntes", href: "/colares/correntes" },
-        { name: "Lariats", href: "/colares/lariats" }
-      ]
+        { name: "Lariats", href: "/colares/lariats" },
+      ],
     },
     {
       name: "Pulseiras",
@@ -57,23 +58,25 @@ const Header = () => {
         { name: "Pulseiras Tennis", href: "/pulseiras/tennis" },
         { name: "Pulseiras Charm", href: "/pulseiras/charm" },
         { name: "Braceletes", href: "/pulseiras/braceletes" },
-        { name: "Pulseiras Corrente", href: "/pulseiras/corrente" }
-      ]
-    }
+        { name: "Pulseiras Corrente", href: "/pulseiras/corrente" },
+      ],
+    },
   ];
 
   return (
     <>
       {/* Barra de aviso superior */}
       <div className="bg-brand-navy text-primary-foreground text-center py-2 px-4 text-sm font-medium">
-        <p>✨ Portes grátis para compras superiores a €75 • Devolução gratuita até 30 dias</p>
+        <p>
+          ✨ Portes grátis para compras superiores a €75 • Devolução gratuita
+          até 30 dias
+        </p>
       </div>
 
       {/* Header principal */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur glass-effect">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
-            
             {/* Logo */}
             <div className="flex items-center space-x-4">
               <Sheet>
@@ -84,40 +87,50 @@ const Header = () => {
                 </SheetTrigger>
                 <SheetContent side="left" className="w-80">
                   <div className="flex flex-col space-y-4 mt-8">
-                    <img src={lumierelogo} alt="Lumiére" className="h-12 w-12 mb-6" />
+                    <img
+                      src={lumierelogo}
+                      alt="Lumiére"
+                      className="h-12 w-12 mb-6"
+                    />
                     {categories.map((category) => (
                       <div key={category.name} className="space-y-2">
-                        <h3 className="font-playfair font-semibold text-lg">{category.name}</h3>
+                        <h3 className="font-playfair font-semibold text-lg">
+                          {category.name}
+                        </h3>
                         {category.subcategories.map((sub) => (
-                          <a
+                          <Link
                             key={sub.name}
-                            href={sub.href}
+                            to={sub.href}
                             className="block text-muted-foreground hover:text-foreground transition-colors pl-4 elegant-underline"
                           >
                             {sub.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     ))}
                   </div>
                 </SheetContent>
               </Sheet>
-              
-              <a href="/" className="flex items-center space-x-2">
+
+              <Link to="/" className="flex items-center space-x-2">
                 <img src={lumierelogo} alt="Lumiére" className="h-10 w-10" />
                 <span className="font-playfair text-xl font-bold">Lumiére</span>
-              </a>
+              </Link>
             </div>
 
             {/* Navegação Desktop */}
             <NavigationMenu className="hidden lg:flex">
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuLink 
-                    href="/novidades"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
-                  >
-                    Novidades
+                  <NavigationMenuLink asChild>
+                    <NavLink
+                      to="/novidades"
+                      className={
+                        "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
+                      }
+                    >
+                      Novidades
+                    </NavLink>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
@@ -129,12 +142,15 @@ const Header = () => {
                     <NavigationMenuContent>
                       <div className="grid gap-3 p-6 w-80">
                         {category.subcategories.map((subcategory) => (
-                          <NavigationMenuLink
-                            key={subcategory.name}
-                            href={subcategory.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium leading-none">{subcategory.name}</div>
+                          <NavigationMenuLink asChild key={subcategory.name}>
+                            <NavLink
+                              to={subcategory.href}
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                            >
+                              <div className="text-sm font-medium leading-none">
+                                {subcategory.name}
+                              </div>
+                            </NavLink>
                           </NavigationMenuLink>
                         ))}
                       </div>
@@ -143,20 +159,24 @@ const Header = () => {
                 ))}
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink 
-                    href="/colecoes"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
-                  >
-                    Coleções
+                  <NavigationMenuLink asChild>
+                    <NavLink
+                      to="/colecoes"
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
+                    >
+                      Coleções
+                    </NavLink>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink 
-                    href="/promocoes"
-                    className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline text-secondary"
-                  >
-                    Promoções
+                  <NavigationMenuLink asChild>
+                    <NavLink
+                      to="/promocoes"
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline text-secondary"
+                    >
+                      Promoções
+                    </NavLink>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -182,7 +202,11 @@ const Header = () => {
                 className="md:hidden"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
               >
-                {isSearchOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
+                {isSearchOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Search className="h-5 w-5" />
+                )}
               </Button>
 
               <Button variant="ghost" size="icon" className="relative">

@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/lumiere/",
+  base: mode === "production" ? "/lumiere/" : "/",
   server: {
     host: "::",
     port: 8080,

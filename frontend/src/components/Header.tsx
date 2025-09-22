@@ -65,53 +65,12 @@ const Header = () => {
 
   return (
     <>
-      {/* Barra de aviso superior */}
-      <div className="bg-brand-navy text-primary-foreground text-center py-2 px-4 text-sm font-medium">
-        <p>
-          ✨ Portes grátis para compras superiores a €75 • Devolução gratuita
-          até 30 dias
-        </p>
-      </div>
-
       {/* Header principal */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur glass-effect">
+      <header className="fixed top-0 z-50 w-full bg-transparent">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-4">
-              <Sheet>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="ghost" size="icon">
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-80">
-                  <div className="flex flex-col space-y-4 mt-8">
-                    <img
-                      src={lumierelogo}
-                      alt="Lumiére"
-                      className="h-12 w-12 mb-6"
-                    />
-                    {categories.map((category) => (
-                      <div key={category.name} className="space-y-2">
-                        <h3 className="font-playfair font-semibold text-lg">
-                          {category.name}
-                        </h3>
-                        {category.subcategories.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            to={sub.href}
-                            className="block text-muted-foreground hover:text-foreground transition-colors pl-4 elegant-underline"
-                          >
-                            {sub.name}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </SheetContent>
-              </Sheet>
-
               <Link to="/" className="flex items-center space-x-2">
                 <img src={lumierelogo} alt="Lumiére" className="h-10 w-10" />
                 <span className="font-playfair text-xl font-bold">Lumiére</span>
@@ -125,9 +84,7 @@ const Header = () => {
                   <NavigationMenuLink asChild>
                     <NavLink
                       to="/novidades"
-                      className={
-                        "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
-                      }
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
                     >
                       Novidades
                     </NavLink>
@@ -145,7 +102,7 @@ const Header = () => {
                           <NavigationMenuLink asChild key={subcategory.name}>
                             <NavLink
                               to={subcategory.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
                             >
                               <div className="text-sm font-medium leading-none">
                                 {subcategory.name}
@@ -162,7 +119,7 @@ const Header = () => {
                   <NavigationMenuLink asChild>
                     <NavLink
                       to="/colecoes"
-                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
                     >
                       Coleções
                     </NavLink>
@@ -173,7 +130,7 @@ const Header = () => {
                   <NavigationMenuLink asChild>
                     <NavLink
                       to="/promocoes"
-                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline text-secondary"
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:pointer-events-none disabled:opacity-50 elegant-underline"
                     >
                       Promoções
                     </NavLink>
@@ -199,7 +156,7 @@ const Header = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
+                className="md:hidden text-white"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
               >
                 {isSearchOpen ? (
@@ -209,9 +166,38 @@ const Header = () => {
                 )}
               </Button>
 
-              <Button variant="ghost" size="icon" className="relative">
-                <User className="h-5 w-5" />
-              </Button>
+              <Sheet>
+                <SheetTrigger asChild className="lg:hidden">
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-80">
+                  <div className="flex flex-col space-y-4 mt-8">
+                    <img
+                      src={lumierelogo}
+                      alt="Lumiére"
+                      className="h-12 w-12 mb-6"
+                    />
+                    {categories.map((category) => (
+                      <div key={category.name} className="space-y-2">
+                        <h3 className="font-playfair font-semibold text-lg text-white">
+                          {category.name}
+                        </h3>
+                        {category.subcategories.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            to={sub.href}
+                            className="block text-muted-foreground hover:text-foreground transition-colors pl-4 elegant-underline"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </SheetContent>
+              </Sheet>
 
               <Button variant="ghost" size="icon" className="relative">
                 <Heart className="h-5 w-5" />

@@ -11,6 +11,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import lumierelogo from "@/assets/lumiere-logo.png";
 import { Link, NavLink } from "react-router-dom";
@@ -168,33 +174,62 @@ const Header = () => {
 
               <Sheet>
                 <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" className="text-white">
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="w-80">
-                  <div className="flex flex-col space-y-4 mt-8">
-                    <img
-                      src={lumierelogo}
-                      alt="Lumiére"
-                      className="h-12 w-12 mb-6"
-                    />
-                    {categories.map((category) => (
-                      <div key={category.name} className="space-y-2">
-                        <h3 className="font-playfair font-semibold text-lg text-white">
-                          {category.name}
-                        </h3>
-                        {category.subcategories.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            to={sub.href}
-                            className="block text-muted-foreground hover:text-foreground transition-colors pl-4 elegant-underline"
-                          >
-                            {sub.name}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
+                <SheetContent side="right" className="w-80 bg-background p-6">
+                  <div className="flex flex-col space-y-2 pt-8">
+                    <NavLink
+                      to="/novidades"
+                      className="py-2 text-lg font-medium transition-colors hover:text-primary"
+                    >
+                      Novidades
+                    </NavLink>
+                    <Accordion type="multiple" className="w-full">
+                      {categories.map((category) => (
+                        <AccordionItem
+                          value={category.name}
+                          key={category.name}
+                          className="border-b-0"
+                        >
+                          <AccordionTrigger className="py-2 text-lg font-medium hover:no-underline">
+                            {category.name}
+                          </AccordionTrigger>
+                          <AccordionContent className="pt-2 pb-4">
+                            <div className="flex flex-col space-y-2 pl-4 border-l-2 border-muted">
+                              <NavLink
+                                to={category.href}
+                                className="text-muted-foreground transition-colors hover:text-primary"
+                              >
+                                Ver tudo em {category.name}
+                              </NavLink>
+                              {category.subcategories.map((subcategory) => (
+                                <NavLink
+                                  key={subcategory.name}
+                                  to={subcategory.href}
+                                  className="text-muted-foreground transition-colors hover:text-primary"
+                                >
+                                  {subcategory.name}
+                                </NavLink>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                    <NavLink
+                      to="/colecoes"
+                      className="py-2 text-lg font-medium transition-colors hover:text-primary"
+                    >
+                      Coleções
+                    </NavLink>
+                    <NavLink
+                      to="/promocoes"
+                      className="py-2 text-lg font-medium transition-colors hover:text-primary"
+                    >
+                      Promoções
+                    </NavLink>
                   </div>
                 </SheetContent>
               </Sheet>

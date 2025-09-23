@@ -65,10 +65,6 @@ const CategoryGrid = () => {
           <h2 className="font-playfair text-4xl font-bold mb-4">
             Descubra as Nossas Categorias
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Cada peça conta uma história única. Explore a nossa coleção de joias
-            elegantes criadas para os momentos mais especiais da sua vida.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
